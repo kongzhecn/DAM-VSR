@@ -449,16 +449,16 @@ class ControlNetSDVModel(ModelMixin, ConfigMixin, UNet2DConditionLoadersMixin, P
 
             down_block_res_samples += res_samples
 
-            new_down_block_res_samples = ()
+        new_down_block_res_samples = ()
 
-            if down_block_additional_residuals is not None:
-                for down_block_res_sample, down_block_additional_residual in zip(
-                    down_block_res_samples, down_block_additional_residuals
-                ):
-                    down_block_res_sample = down_block_res_sample + down_block_additional_residual * conditioning_scale
-                    new_down_block_res_samples = new_down_block_res_samples + (down_block_res_sample,)
+        if down_block_additional_residuals is not None:
+            for down_block_res_sample, down_block_additional_residual in zip(
+                down_block_res_samples, down_block_additional_residuals
+            ):
+                down_block_res_sample = down_block_res_sample + down_block_additional_residual * conditioning_scale
+                new_down_block_res_samples = new_down_block_res_samples + (down_block_res_sample,)
 
-                down_block_res_samples = new_down_block_res_samples
+            down_block_res_samples = new_down_block_res_samples
 
         
         # 4. mid
